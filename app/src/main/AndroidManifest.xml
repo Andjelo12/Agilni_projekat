@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Add"
             android:exported="false" />
         <activity
             android:name=".Substract"

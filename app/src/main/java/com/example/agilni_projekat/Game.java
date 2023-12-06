@@ -6,26 +6,26 @@ import java.util.List;
 public class Game {
 
 
-    private List<Question> questions;
+    private List<QuestionAdd> questionAdds;
     private int numberCorrect, numberIncorrect,totalQuestions,score;
-    private Question currentQuestion;
+    private QuestionAdd currentQuestionAdd;
 
     public Game(){
         numberCorrect=0;
         numberIncorrect=0;
         totalQuestions=0;
         score=0;
-        currentQuestion=new Question(10);
-        questions=new ArrayList<Question>();
+        currentQuestionAdd =new QuestionAdd(10);
+        questionAdds =new ArrayList<QuestionAdd>();
     }
     public void makeNewQuestion(){
-        currentQuestion=new Question(totalQuestions*2+5);
+        currentQuestionAdd =new QuestionAdd(totalQuestions*2+5);
         totalQuestions++;
-        questions.add(currentQuestion);
+        questionAdds.add(currentQuestionAdd);
     }
     public boolean checkAnswer(int submittedAnswer){
         boolean isCorrect;
-        if(currentQuestion.getAnswer()==submittedAnswer){
+        if(currentQuestionAdd.getAnswer()==submittedAnswer){
             numberCorrect++;
             isCorrect=true;
         }else {
@@ -35,12 +35,12 @@ public class Game {
         score=numberCorrect*10-numberIncorrect*30;
         return isCorrect;
     }
-    public List<Question> getQuestions() {
-        return questions;
+    public List<QuestionAdd> getQuestions() {
+        return questionAdds;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public void setQuestions(List<QuestionAdd> questionAdds) {
+        this.questionAdds = questionAdds;
     }
 
     public int getNumberCorrect() {
@@ -75,11 +75,11 @@ public class Game {
         this.score = score;
     }
 
-    public Question getCurrentQuestion() {
-        return currentQuestion;
+    public QuestionAdd getCurrentQuestion() {
+        return currentQuestionAdd;
     }
 
-    public void setCurrentQuestion(Question currentQuestion) {
-        this.currentQuestion = currentQuestion;
+    public void setCurrentQuestion(QuestionAdd currentQuestionAdd) {
+        this.currentQuestionAdd = currentQuestionAdd;
     }
 }

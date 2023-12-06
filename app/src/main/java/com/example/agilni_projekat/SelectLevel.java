@@ -96,7 +96,7 @@ public class SelectLevel extends AppCompatActivity {
             public void onClick(View view) {
                 switch (mode){
                     case "add":
-                        Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                        Intent i = new Intent(getApplicationContext(), Add.class);
                         i.putExtra("mode",mode);
                         i.putExtra("diff","hard");
                         startActivity(i);

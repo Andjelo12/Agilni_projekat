@@ -2,14 +2,14 @@ package com.example.agilni_projekat;
 
 import java.util.Random;
 
-public class Question {
+public class QuestionAdd {
     private int  firstNumber, secondNumber, answer;
     private int [] answerArray;
     private int answerPosition;
     private int upperLimit;
     private String questionPhrase;
 
-    public Question(int upperLimit){
+    public QuestionAdd(int upperLimit){
         this.upperLimit=upperLimit;
         Random randomNumberMaker=new Random();
 
