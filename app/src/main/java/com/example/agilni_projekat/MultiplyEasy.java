@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Divide extends AppCompatActivity {
+public class MultiplyEasy extends AppCompatActivity {
     Button btn_start, btn_answer0, btn_answer1, btn_answer2, btn_answer3, btn_answer4, btn_answer5, btn_answer6, btn_answer7;
     TextView tv_score,tv_questions, tv_timer,tv_bottommessage;
     ProgressBar prog_timer;
@@ -49,7 +49,7 @@ public class Divide extends AppCompatActivity {
         }
     };
 
-    GameDiv g = new GameDiv();
+    GameMulti g = new GameMulti();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +87,7 @@ public class Divide extends AppCompatActivity {
 
                 start_button.setVisibility(View.INVISIBLE);
                 secondsRemaining=20;
-                g = new GameDiv();
+                g = new GameMulti();
                 nextTurn();
                 timer.start();
             }

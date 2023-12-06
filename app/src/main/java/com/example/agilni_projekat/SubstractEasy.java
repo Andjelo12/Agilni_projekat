@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Multiply extends AppCompatActivity {
+public class SubstractEasy extends AppCompatActivity {
     Button btn_start, btn_answer0, btn_answer1, btn_answer2, btn_answer3, btn_answer4, btn_answer5, btn_answer6, btn_answer7;
     TextView tv_score,tv_questions, tv_timer,tv_bottommessage;
     ProgressBar prog_timer;
@@ -49,7 +49,7 @@ public class Multiply extends AppCompatActivity {
         }
     };
 
-    GameMulti g = new GameMulti();
+    GameSub g = new GameSub();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +72,7 @@ public class Multiply extends AppCompatActivity {
 
         prog_timer=findViewById(R.id.prog_timer);
 
-        prog_timer.setMax(20);
+        prog_timer.setMax(20);///////////
 
         tv_timer.setText("0Sek");
         tv_questions.setText("");
@@ -87,7 +87,7 @@ public class Multiply extends AppCompatActivity {
 
                 start_button.setVisibility(View.INVISIBLE);
                 secondsRemaining=20;
-                g = new GameMulti();
+                g = new GameSub();
                 nextTurn();
                 timer.start();
             }

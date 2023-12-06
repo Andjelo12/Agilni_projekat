@@ -26,28 +26,28 @@ public class SelectLevel extends AppCompatActivity {
             public void onClick(View view) {
                 switch (mode){
                     case "add":
-                        Intent i = new Intent(getApplicationContext(),AddHard.class);
+                        Intent i = new Intent(getApplicationContext(),AddEasy.class);
                         i.putExtra("mode",mode);
                         i.putExtra("diff","easy");
                         startActivity(i);
                         finish();
                         break;
                     case "sub":
-                        Intent is = new Intent(getApplicationContext(),SubstractHard.class);
+                        Intent is = new Intent(getApplicationContext(),SubstractEasy.class);
                         is.putExtra("mode",mode);
                         is.putExtra("diff","easy");
                         startActivity(is);
                         finish();
                         break;
                     case "multi":
-                        Intent im = new Intent(getApplicationContext(),MultiplyHard.class);
+                        Intent im = new Intent(getApplicationContext(),MultiplyEasy.class);
                         im.putExtra("mode",mode);
                         im.putExtra("diff","easy");
                         startActivity(im);
                         finish();
                         break;
                     case "div":
-                        Intent id = new Intent(getApplicationContext(),DivideHard.class);
+                        Intent id = new Intent(getApplicationContext(),DivideEasy.class);
                         id.putExtra("mode",mode);
                         id.putExtra("diff","easy");
                         startActivity(id);
@@ -96,28 +96,28 @@ public class SelectLevel extends AppCompatActivity {
             public void onClick(View view) {
                 switch (mode){
                     case "add":
-                        Intent i = new Intent(getApplicationContext(), Add.class);
+                        Intent i = new Intent(getApplicationContext(), AddHard.class);
                         i.putExtra("mode",mode);
                         i.putExtra("diff","hard");
                         startActivity(i);
                         finish();
                         break;
                     case "sub":
-                        Intent is = new Intent(getApplicationContext(),Substract.class);
+                        Intent is = new Intent(getApplicationContext(), SubstractHard.class);
                         is.putExtra("mode",mode);
                         is.putExtra("diff","hard");
                         startActivity(is);
                         finish();
                         break;
                     case "multi":
-                        Intent im = new Intent(getApplicationContext(),Multiply.class);
+                        Intent im = new Intent(getApplicationContext(), MultiplyHard.class);
                         im.putExtra("mode",mode);
                         im.putExtra("diff","hard");
                         startActivity(im);
                         finish();
                         break;
                     case "div":
-                        Intent id = new Intent(getApplicationContext(),Divide.class);
+                        Intent id = new Intent(getApplicationContext(), DivideHard.class);
                         id.putExtra("mode",mode);
                         id.putExtra("diff","hard");
                         startActivity(id);

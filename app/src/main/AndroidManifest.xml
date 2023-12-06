@@ -35,16 +35,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Add"
+            android:name=".AddEasy"
             android:exported="false" />
         <activity
-            android:name=".Substract"
+            android:name=".SubstractEasy"
             android:exported="false" />
         <activity
-            android:name=".Multiply"
+            android:name=".MultiplyEasy"
             android:exported="false" />
         <activity
-            android:name=".Divide"
+            android:name=".DivideEasy"
             android:exported="false" />
         <activity
             android:name=".AddMedium"

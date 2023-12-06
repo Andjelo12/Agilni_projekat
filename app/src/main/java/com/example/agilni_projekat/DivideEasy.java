@@ -10,23 +10,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Add extends AppCompatActivity {
+public class DivideEasy extends AppCompatActivity {
     Button btn_start, btn_answer0, btn_answer1, btn_answer2, btn_answer3, btn_answer4, btn_answer5, btn_answer6, btn_answer7;
     TextView tv_score,tv_questions, tv_timer,tv_bottommessage;
     ProgressBar prog_timer;
 
-    Bundle extras = getIntent().getExtras();
-    //if (extras != null) {
-        String value = extras.getString("key");
-        //The key argument here must match that used in the other activity
-    //}
     int secondsRemaining=20;
 
     CountDownTimer timer=new CountDownTimer(20000,1000) {
         @Override
         public void onTick(long l) {
             secondsRemaining--;
-            tv_timer.setText(Integer.toString(secondsRemaining)+"sek");// /*zameniti za poene*/
+            tv_timer.setText(Integer.toString(secondsRemaining)+"sek");
             prog_timer.setProgress(20-secondsRemaining);
         }
 
@@ -54,7 +49,7 @@ public class Add extends AppCompatActivity {
         }
     };
 
-    Game g = new Game();
+    GameDiv g = new GameDiv();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +72,7 @@ public class Add extends AppCompatActivity {
 
         prog_timer=findViewById(R.id.prog_timer);
 
-        prog_timer.setMax(20);// menjamo u zavisnosti od preostalog vremena
+        prog_timer.setMax(20);
 
         tv_timer.setText("0Sek");
         tv_questions.setText("");
@@ -92,7 +87,7 @@ public class Add extends AppCompatActivity {
 
                 start_button.setVisibility(View.INVISIBLE);
                 secondsRemaining=20;
-                g = new Game();
+                g = new GameDiv();
                 nextTurn();
                 timer.start();
             }
@@ -105,7 +100,7 @@ public class Add extends AppCompatActivity {
 
                 int answerSlected=Integer.parseInt(buttonClicked.getText().toString());
                 g.checkAnswer(answerSlected);
-                tv_score.setText(Integer.toString(g.getScore()));//za prodjeni broj sekundi izmedju svakog odgovora
+                tv_score.setText(Integer.toString(g.getScore()));
                 nextTurn();
             }
         };
@@ -131,7 +126,6 @@ public class Add extends AppCompatActivity {
         btn_answer5.setText(Integer.toString(answer[5]));
         btn_answer6.setText(Integer.toString(answer[6]));
         btn_answer7.setText(Integer.toString(answer[7]));
-
 
         btn_answer0.setEnabled(true);
         btn_answer1.setEnabled(true);
