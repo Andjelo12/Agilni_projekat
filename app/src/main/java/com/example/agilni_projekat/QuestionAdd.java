@@ -29,35 +29,35 @@ public class QuestionAdd {
 
         this.answerArray[0]= answer+4;
         while(this.answerArray[0]>12 || this.answerArray[0]==0){
-            this.answerArray[0]--;
+            //this.answerArray[0]--;
         }
         this.answerArray[1]= answer+3;
         while(this.answerArray[1]>12 || this.answerArray[1]==0){
-            this.answerArray[1]--;
+            //this.answerArray[1]--;
         }
         this.answerArray[2]= answer+2;
         while(this.answerArray[2]>12 || this.answerArray[2]==0){
-            this.answerArray[2]--;
+            //this.answerArray[2]--;
         }
         this.answerArray[3]= answer+1;
         while(this.answerArray[3]>12 || this.answerArray[3]==0){
-            this.answerArray[3]--;
+            //this.answerArray[3]--;
         }
         this.answerArray[4]= answer;
         while(this.answerArray[4]>12 || this.answerArray[4]==0){
-            this.answerArray[4]--;
+            //this.answerArray[4]--;
         }
         this.answerArray[5]= answer-1;
         while(this.answerArray[5]>12 || this.answerArray[5]==0){
-            this.answerArray[5]--;
+            //this.answerArray[5]--;
         }
         this.answerArray[6]= answer-2;
         while(this.answerArray[6]>12 || this.answerArray[6]==0){
-            this.answerArray[6]--;
+            //this.answerArray[6]--;
         }
         this.answerArray[7]= answer-3;
         while(this.answerArray[7]>12 || this.answerArray[7]==0){
-            this.answerArray[7]--;
+            //this.answerArray[7]--;
         }
 
         this.answerArray=shuffleArray(this.answerArray);
