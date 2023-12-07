@@ -27,7 +27,7 @@ public class QuestionAddMedium {
         this.answerPosition=randomNumberMaker.nextInt(6);
         this.answerArray=new int[] {0,1,2,3,4,5};
 
-        this.answerArray[0]= answer+1;
+        this.answerArray[0]= answer+3;
         while(this.answerArray[0]>12 || this.answerArray[0]==0){
             this.answerArray[0]--;
         }
@@ -35,11 +35,11 @@ public class QuestionAddMedium {
         while(this.answerArray[1]>12 || this.answerArray[1]==0){
             this.answerArray[1]--;
         }
-        this.answerArray[2]= answer-1;
+        this.answerArray[2]= answer+1;
         while(this.answerArray[2]>12 || this.answerArray[2]==0){
             this.answerArray[2]--;
         }
-        this.answerArray[3]= answer-2;
+        this.answerArray[3]= answer-1;
         while(this.answerArray[3]>12 || this.answerArray[3]==0){
             this.answerArray[3]--;
         }
@@ -47,7 +47,7 @@ public class QuestionAddMedium {
         while(this.answerArray[4]>12 || this.answerArray[4]==0){
             this.answerArray[4]--;
         }
-        this.answerArray[5]= answer-2;
+        this.answerArray[5]= answer-3;
         while(this.answerArray[5]>12 || this.answerArray[5]==0){
             this.answerArray[5]--;
         }

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddEasy extends AppCompatActivity {
-    Button btn_start, btn_answer0, btn_answer1, btn_answer2, btn_answer3, btn_answer4, btn_answer5, btn_answer6, btn_answer7;
+    Button btn_start, btn_answer0, btn_answer1, btn_answer2, btn_answer3;
     TextView tv_score,tv_questions, tv_timer,tv_bottommessage;
     ProgressBar prog_timer;
 
@@ -20,14 +20,14 @@ public class AddEasy extends AppCompatActivity {
         //String value = extras.getString("key");
         //The key argument here must match that used in the other activity
     //}
-    int secondsRemaining=20;
+    int secondsRemaining=40;
 
-    CountDownTimer timer=new CountDownTimer(20000,1000) {
+    CountDownTimer timer=new CountDownTimer(40000,1000) {
         @Override
         public void onTick(long l) {
             secondsRemaining--;
-            tv_timer.setText(Integer.toString(secondsRemaining)+"sek");// /*zameniti za poene*/
-            prog_timer.setProgress(20-secondsRemaining);
+            tv_timer.setText(Integer.toString(secondsRemaining)+"sek");
+            prog_timer.setProgress(40-secondsRemaining);
         }
 
         @Override
@@ -36,10 +36,6 @@ public class AddEasy extends AppCompatActivity {
             btn_answer1.setEnabled(false);
             btn_answer2.setEnabled(false);
             btn_answer3.setEnabled(false);
-            btn_answer4.setEnabled(false);
-            btn_answer5.setEnabled(false);
-            btn_answer6.setEnabled(false);
-            btn_answer7.setEnabled(false);
             tv_bottommessage.setText("Vreme je isteklo! "+g.getNumberCorrect()+"/"+(g.getTotalQuestions()-1));
 
             final Handler handler=new Handler();
@@ -54,7 +50,7 @@ public class AddEasy extends AppCompatActivity {
         }
     };
 
-    Game g = new Game();
+    GameAddHard g = new GameAddHard();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +61,6 @@ public class AddEasy extends AppCompatActivity {
         btn_answer1=findViewById(R.id.btn_answer1);
         btn_answer2=findViewById(R.id.btn_answer2);
         btn_answer3=findViewById(R.id.btn_answer3);
-        btn_answer4=findViewById(R.id.btn_answer4);
-        btn_answer5=findViewById(R.id.btn_answer5);
-        btn_answer6=findViewById(R.id.btn_answer6);
-        btn_answer7=findViewById(R.id.btn_answer7);
 
         tv_score=findViewById(R.id.tv_score);
         tv_bottommessage=findViewById(R.id.tv_bottommessage);
@@ -77,7 +69,7 @@ public class AddEasy extends AppCompatActivity {
 
         prog_timer=findViewById(R.id.prog_timer);
 
-        prog_timer.setMax(20);// menjamo u zavisnosti od preostalog vremena
+        prog_timer.setMax(40);///////////
 
         tv_timer.setText("0Sek");
         tv_questions.setText("");
@@ -91,8 +83,8 @@ public class AddEasy extends AppCompatActivity {
                 Button start_button=(Button)view;
 
                 start_button.setVisibility(View.INVISIBLE);
-                secondsRemaining=20;
-                g = new Game();
+                secondsRemaining=40;
+                g = new GameAddHard();
                 nextTurn();
                 timer.start();
             }
@@ -105,7 +97,7 @@ public class AddEasy extends AppCompatActivity {
 
                 int answerSlected=Integer.parseInt(buttonClicked.getText().toString());
                 g.checkAnswer(answerSlected);
-                tv_score.setText(Integer.toString(g.getScore()));//za prodjeni broj sekundi izmedju svakog odgovora
+                tv_score.setText(Integer.toString(g.getScore()));
                 nextTurn();
             }
         };
@@ -115,10 +107,6 @@ public class AddEasy extends AppCompatActivity {
         btn_answer1.setOnClickListener(answerButtonClickListener);
         btn_answer2.setOnClickListener(answerButtonClickListener);
         btn_answer3.setOnClickListener(answerButtonClickListener);
-        btn_answer4.setOnClickListener(answerButtonClickListener);
-        btn_answer5.setOnClickListener(answerButtonClickListener);
-        btn_answer6.setOnClickListener(answerButtonClickListener);
-        btn_answer7.setOnClickListener(answerButtonClickListener);
     }
     private void nextTurn(){
         g.makeNewQuestion();
@@ -127,20 +115,12 @@ public class AddEasy extends AppCompatActivity {
         btn_answer1.setText(Integer.toString(answer[1]));
         btn_answer2.setText(Integer.toString(answer[2]));
         btn_answer3.setText(Integer.toString(answer[3]));
-        btn_answer4.setText(Integer.toString(answer[4]));
-        btn_answer5.setText(Integer.toString(answer[5]));
-        btn_answer6.setText(Integer.toString(answer[6]));
-        btn_answer7.setText(Integer.toString(answer[7]));
 
 
         btn_answer0.setEnabled(true);
         btn_answer1.setEnabled(true);
         btn_answer2.setEnabled(true);
         btn_answer3.setEnabled(true);
-        btn_answer4.setEnabled(true);
-        btn_answer5.setEnabled(true);
-        btn_answer6.setEnabled(true);
-        btn_answer7.setEnabled(true);
 
         tv_questions.setText(g.getCurrentQuestion().getQuestionPhrase());
 

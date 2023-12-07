@@ -35,40 +35,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddEasy"
-            android:exported="false" />
-        <activity
-            android:name=".SubstractEasy"
-            android:exported="false" />
-        <activity
-            android:name=".MultiplyEasy"
-            android:exported="false" />
-        <activity
-            android:name=".DivideEasy"
-            android:exported="false" />
-        <activity
-            android:name=".AddMedium"
-            android:exported="false" />
-        <activity
             android:name=".AddHard"
-            android:exported="false" />
-        <activity
-            android:name=".SubstractMedium"
             android:exported="false" />
         <activity
             android:name=".SubstractHard"
             android:exported="false" />
         <activity
+            android:name=".MultiplyHard"
+            android:exported="false" />
+        <activity
+            android:name=".DivideHard"
+            android:exported="false" />
+        <activity
+            android:name=".AddMedium"
+            android:exported="false" />
+        <activity
+            android:name=".AddEasy"
+            android:exported="false" />
+        <activity
+            android:name=".SubstractMedium"
+            android:exported="false" />
+        <activity
+            android:name=".SubstractEasy"
+            android:exported="false" />
+        <activity
             android:name=".MultiplyMedium"
             android:exported="false" />
         <activity
-            android:name=".MultiplyHard"
+            android:name=".MultiplyEasy"
             android:exported="false" />
         <activity
             android:name=".DivideMedium"
             android:exported="false" />
         <activity
-            android:name=".DivideHard"
+            android:name=".DivideEasy"
             android:exported="false" />
     </application>
 
