@@ -15,6 +15,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".StartGame"
+            android:exported="false" />
+        <activity
             android:name=".SelectLevel"
             android:exported="false" />
         <activity
@@ -34,42 +37,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AddHard"
-            android:exported="false" />
-        <activity
-            android:name=".SubstractHard"
-            android:exported="false" />
-        <activity
-            android:name=".MultiplyHard"
-            android:exported="false" />
-        <activity
-            android:name=".DivideHard"
-            android:exported="false" />
-        <activity
-            android:name=".AddMedium"
-            android:exported="false" />
-        <activity
-            android:name=".AddEasy"
-            android:exported="false" />
-        <activity
-            android:name=".SubstractMedium"
-            android:exported="false" />
-        <activity
-            android:name=".SubstractEasy"
-            android:exported="false" />
-        <activity
-            android:name=".MultiplyMedium"
-            android:exported="false" />
-        <activity
-            android:name=".MultiplyEasy"
-            android:exported="false" />
-        <activity
-            android:name=".DivideMedium"
-            android:exported="false" />
-        <activity
-            android:name=".DivideEasy"
-            android:exported="false" />
     </application>
 
 </manifest>

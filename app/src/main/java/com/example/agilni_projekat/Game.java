@@ -6,20 +6,19 @@ import java.util.List;
 public class Game {
 
 
-    private List<QuestionAdd> questionAdds;
-    private int numberCorrect, numberIncorrect,totalQuestions,score;
-    private QuestionAdd currentQuestionAdd;
+    private List<Question> questionAdds;
+    private int numberCorrect, numberIncorrect,totalQuestions;
+    private Question currentQuestionAdd;
 
-    public Game(){
+    public Game(String type, String difficulty){
         numberCorrect=0;
         numberIncorrect=0;
         totalQuestions=0;
-        score=0;
-        currentQuestionAdd =new QuestionAdd(10);
-        questionAdds =new ArrayList<QuestionAdd>();
+        currentQuestionAdd = new Question(type, difficulty);
+        questionAdds =new ArrayList<Question>();
     }
-    public void makeNewQuestion(){
-        currentQuestionAdd =new QuestionAdd(totalQuestions*2+5);
+    public void makeNewQuestion(String type, String difficulty){
+        currentQuestionAdd = new Question(type, difficulty);
         totalQuestions++;
         questionAdds.add(currentQuestionAdd);
     }
@@ -32,14 +31,13 @@ public class Game {
             numberIncorrect++;
             isCorrect=false;
         }
-        score=numberCorrect*10-numberIncorrect*30;
         return isCorrect;
     }
-    public List<QuestionAdd> getQuestions() {
+    public List<Question> getQuestions() {
         return questionAdds;
     }
 
-    public void setQuestions(List<QuestionAdd> questionAdds) {
+    public void setQuestions(List<Question> questionAdds) {
         this.questionAdds = questionAdds;
     }
 
@@ -67,19 +65,11 @@ public class Game {
         this.totalQuestions = totalQuestions;
     }
 
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public QuestionAdd getCurrentQuestion() {
+    public Question getCurrentQuestion() {
         return currentQuestionAdd;
     }
 
-    public void setCurrentQuestion(QuestionAdd currentQuestionAdd) {
+    public void setCurrentQuestion(Question currentQuestionAdd) {
         this.currentQuestionAdd = currentQuestionAdd;
     }
 }

@@ -11,25 +11,21 @@
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:autoText="false"
-        android:background="#4CAF50"
+        android:background="#f66d9b"
         android:text="nova igra"
         android:textColor="#FFFDFD"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/prog_timer"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:max="30"
-        android:progress="20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -71,22 +67,25 @@
         android:id="@+id/tv_bottommessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:text="TextView"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
+        app:layout_constraintVertical_bias="0.24000001" />
 
     <TableLayout
+        android:id="@+id/tableLayout2"
         android:layout_width="0dp"
-        android:layout_height="600dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_questions"
-        app:layout_constraintVertical_bias="0.32">
+        app:layout_constraintVertical_bias="0.0">
 
         <TableRow
             android:layout_width="match_parent"
@@ -98,8 +97,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:height="150dp"
-                android:background="#81ecec"
-                android:text="Button"
+                android:background="#ff6961"
+                android:text="odgovor 1"
                 android:textColor="#FBFBFB" />
 
             <Button
@@ -108,8 +107,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:height="150dp"
-                android:background="#74b9ff"
-                android:text="Button"
+                android:background="#ffb480"
+                android:text="odgovor 2"
                 android:textColor="#FBFBFB" />
 
         </TableRow>
@@ -124,8 +123,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:height="150dp"
-                android:background="#00cec9"
-                android:text="Button"
+                android:background="#f8f38d"
+                android:text="odgovor 3"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -134,8 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:height="150dp"
-                android:background="#0984e3"
-                android:text="Button"
+                android:background="#42d6a4"
+                android:text="odgovor 4"
                 android:textColor="#FFFFFF" />
 
         </TableRow>
@@ -150,8 +149,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:height="150dp"
-                android:background="#297878"
-                android:text="Button"
+                android:background="#08cad1"
+                android:text="odgovor 5"
                 android:textColor="#FBFBFB" />
 
             <Button
@@ -160,8 +159,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:height="150dp"
-                android:background="#296CB1"
-                android:text="Button"
+                android:background="#59adf6"
+                android:text="odgovor 6"
                 android:textColor="#FBFBFB" />
 
         </TableRow>
@@ -176,8 +175,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:height="150dp"
-                android:background="#46B5B5"
-                android:text="Button"
+                android:background="#9d94ff"
+                android:text="odgovor 7"
                 android:textColor="#FBFBFB" />
 
             <Button
@@ -186,8 +185,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:height="150dp"
-                android:background="#8FC6FF"
-                android:text="Button"
+                android:background="#c780e8"
+                android:text="odgovor 8"
                 android:textColor="#FBFBFB" />
 
         </TableRow>

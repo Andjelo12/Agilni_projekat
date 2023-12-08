@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 public class MainMenu extends AppCompatActivity {
     Button btnAdd, btnSub, btnMulti, btnDiv, btnLogout;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,11 +20,12 @@ public class MainMenu extends AppCompatActivity {
         btnMulti=findViewById(R.id.btn_answer2);
         btnDiv=findViewById(R.id.btn_answer3);
         btnLogout=findViewById(R.id.button5);
+        intent=new Intent(getApplicationContext(),SelectLevel.class);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(),SelectLevel.class);
-                intent.putExtra("mode","add");
+                intent.putExtra("type","add");
                 startActivity(intent);
                 finish();
             }
@@ -31,8 +33,7 @@ public class MainMenu extends AppCompatActivity {
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),SelectLevel.class);
-                intent.putExtra("mode","sub");
+                intent.putExtra("type","subtract");
                 startActivity(intent);
                 finish();
             }
@@ -40,8 +41,7 @@ public class MainMenu extends AppCompatActivity {
         btnMulti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),SelectLevel.class);
-                intent.putExtra("mode","multi");
+                intent.putExtra("type","multiply");
                 startActivity(intent);
                 finish();
             }
@@ -49,8 +49,7 @@ public class MainMenu extends AppCompatActivity {
         btnDiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),SelectLevel.class);
-                intent.putExtra("mode","div");
+                intent.putExtra("type","module");
                 startActivity(intent);
                 finish();
             }
@@ -58,7 +57,7 @@ public class MainMenu extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),Login.class);
+                intent=new Intent(getApplicationContext(),Login.class);
                 startActivity(intent);
                 finish();
             }
