@@ -73,7 +73,7 @@ public class StartGame extends AppCompatActivity {
         tv_timer.setText(seconds+" sekundi");
         tv_questions.setText("");
         tv_bottommessage.setText("tačni/pogrešni");
-        tv_score.setText("milisekundi");
+        tv_score.setText("sekundi");
         prog_timer.setProgress(0);
         middleTime=new ArrayList<>();
         View.OnClickListener startButtonClickListener=new View.OnClickListener() {
@@ -98,9 +98,9 @@ public class StartGame extends AppCompatActivity {
                 g.checkAnswer(answerSlected);
                 middleTime.add(System.currentTimeMillis());
                 if (middleTime.size()!=1)
-                    tv_score.setText(Long.toString(middleTime.get(middleTime.size()-1)-middleTime.get(middleTime.size()-2)));
+                    tv_score.setText(Float.toString((float)(middleTime.get(middleTime.size()-1)-middleTime.get(middleTime.size()-2))/1000));
                 else
-                    tv_score.setText(Long.toString(middleTime.get(middleTime.size()-1)-startTime));
+                    tv_score.setText(Float.toString((float)(middleTime.get(middleTime.size()-1)-startTime)/1000));
                 nextTurn(g,type,difficulty);
             }
         };

@@ -1,16 +1,17 @@
 package com.example.agilni_projekat;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Question {
     private int firstNumber, secondNumber, answer;
     private int[] answerArray;
-    private int answerPosition;
+    private int answerPosition, i, upperLimit;
     private String questionPhrase;
-    private int i,upperLimit;
 
     public Question(String type, String difficulty) {
         Random randomNumberMaker = new Random();
@@ -20,27 +21,27 @@ public class Question {
             case "add":
                 this.answer = this.firstNumber + this.secondNumber;
                 this.questionPhrase = firstNumber + " + " + secondNumber + " = ";
-                upperLimit=12;
+                upperLimit = 12;
                 break;
             case "subtract":
                 if (this.firstNumber < this.secondNumber) {
                     int temp = this.firstNumber;
-                    this.secondNumber=this.firstNumber;
-                    this.firstNumber=temp;
+                    this.firstNumber = this.secondNumber;
+                    this.secondNumber = temp;
                 }
-                upperLimit=5;
                 this.answer = this.firstNumber - this.secondNumber;
                 this.questionPhrase = firstNumber + " - " + secondNumber + " = ";
+                upperLimit = 12;
                 break;
             case "multiply":
-                upperLimit=36;
                 this.answer = this.firstNumber * this.secondNumber;
                 this.questionPhrase = firstNumber + " * " + secondNumber + " = ";
+                upperLimit = 36;
                 break;
             case "module":
-                upperLimit=5;
                 this.answer = this.firstNumber % this.secondNumber;
                 this.questionPhrase = firstNumber + " % " + secondNumber + " = ";
+                upperLimit = 12;
                 break;
         }
         switch (difficulty) {
@@ -55,26 +56,33 @@ public class Question {
                 break;
         }
         this.answerPosition = randomNumberMaker.nextInt(i);//poslati broj kombinacija zavisno od nivoa
-        this.answerArray = new int[i];
-        for (int j = i - 1; j >= 0; j--) {
-            this.answerArray[j] = ThreadLocalRandom.current().nextInt(1, upperLimit);
-        }
+        this.answerArray = generateRandomNumbersArray(i, 1, upperLimit);
+//        for (int j = 0; j < i-1; j++) {
+//            this.answerArray[j] = ThreadLocalRandom.current().nextInt(1, upperLimit);
+//        }
         answerArray[answerPosition] = answer;
     }
-
-    private int[] shuffleArray(int[] array) {
-        int index, temp;
-        Random randomNumberGenerator = new Random();
-
-        for (int i = array.length - 1; i > 0; i--) {
-            index = randomNumberGenerator.nextInt(i + 1);
-            temp = array[index];
-            array[index] = array[i];
-            array[i] = temp;
+    private static int[] generateRandomNumbersArray(int n, int i, int j) {
+        if (n > (j - i + 1)) {
+            throw new IllegalArgumentException("Cannot generate " + n + " unique random numbers in the specified range");
         }
-        return array;
-    }
 
+        Random random = new Random();
+        Set<Integer> uniqueRandomNumbers = new HashSet<>();
+
+        while (uniqueRandomNumbers.size() < n) {
+            int randomNumber = random.nextInt(j - i + 1) + i;
+            uniqueRandomNumbers.add(randomNumber);
+        }
+
+        int[] randomNumbersArray = new int[n];
+        int index = 0;
+        for (int randomNumber : uniqueRandomNumbers) {
+            randomNumbersArray[index++] = randomNumber;
+        }
+
+        return randomNumbersArray;
+    }
     public int getFirstNumber() {
         return firstNumber;
     }
