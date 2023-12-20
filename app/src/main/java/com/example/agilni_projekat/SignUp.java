@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -14,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.vishnusivadas.advanced_httpurlconnection.FetchData;
-import com.vishnusivadas.advanced_httpurlconnection.PutData;
+//import com.vishnusivadas.advanced_httpurlconnection.FetchData;
+//import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class SignUp extends AppCompatActivity {
 
@@ -74,7 +73,7 @@ public class SignUp extends AppCompatActivity {
                         String[] data = new String[2];
                         data[0]=username;
                         data[1]=password;
-                        PutData putData = new PutData("http://192.168.1.15/agilni_projekat/signup.php","POST",field,data);
+                        PutData putData = new PutData("http://first.stud.vts.su.ac.rs/agilni_projekat/signup.php","POST",field,data);
                         if (putData.startPut()) {
                             if (putData.onComplete()) {
                                 progressBar.setVisibility(View.GONE);

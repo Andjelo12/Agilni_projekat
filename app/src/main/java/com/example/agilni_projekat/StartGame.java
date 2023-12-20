@@ -1,14 +1,19 @@
 package com.example.agilni_projekat;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+//import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import java.util.ArrayList;
 
@@ -18,20 +23,16 @@ public class StartGame extends AppCompatActivity {
     ProgressBar prog_timer;
     long startTime;
     ArrayList<Long> middleTime;
-    //Bundle extras = getIntent().getExtras();
-    //if (extras != null) {
-        //String value = extras.getString("key");
-        //The key argument here must match that used in the other activity
-    //}
     int secondsRemaining, totalSeconds;
+    float shortest_time,avg_time;
     CountDownTimer timer;
-    int seconds;
     Game g;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
         String type = extras.getString("type");
+        String id = extras.getString("id");
         String difficulty = extras.getString("difficulty");
         if (difficulty.equals("Easy"))
             setContentView(R.layout.activity_easy);
@@ -82,7 +83,6 @@ public class StartGame extends AppCompatActivity {
                 Button start_button=(Button)view;
                 start_button.setVisibility(View.INVISIBLE);
                 totalSeconds=secondsRemaining=seconds;
-                tv_score.setText("");
                 g = new Game(type,difficulty);
                 startTime=System.currentTimeMillis();
                 nextTurn(g,type,difficulty);
@@ -104,6 +104,7 @@ public class StartGame extends AppCompatActivity {
                 nextTurn(g,type,difficulty);
             }
         };
+
 
         btn_start.setOnClickListener(startButtonClickListener);
         btn_answer0.setOnClickListener(answerButtonClickListener);
@@ -128,14 +129,51 @@ public class StartGame extends AppCompatActivity {
                 prog_timer.setProgress(totalSeconds-secondsRemaining);
             }
 
+            @SuppressLint("DefaultLocale")
             @Override
             public void onFinish() {
+                if (g.getTotalQuestions()-1!=0) {
+                    avg_time=(float)seconds/(g.getTotalQuestions()-1);
+                    shortest_time = (float) (middleTime.get(0) - startTime);
+                    for (int i = 1; i < middleTime.size(); i++)
+                        if (middleTime.get(i) - middleTime.get(i - 1) < shortest_time) {
+                            shortest_time = (float) (middleTime.get(i) - middleTime.get(i - 1));
+                        }
+                }
                 btn_answer0.setEnabled(false);
                 btn_answer1.setEnabled(false);
                 btn_answer2.setEnabled(false);
                 btn_answer3.setEnabled(false);
                 tv_bottommessage.setText("Vreme je isteklo! "+g.getNumberCorrect()+"/"+(g.getTotalQuestions()-1));
-
+                String[] field = new String[7];
+                field[0]="id_user";
+                field[1]="correct_answers";
+                field[2]="incorrect_answers";
+                field[3]="avg_time";
+                field[4]="fastest_answer";
+                field[5]="game_type";
+                field[6]="game_level";
+                String[] data = new String[7];
+                if (id!=null)
+                    data[0]=id;
+                else
+                    data[0]="anonymous";
+                data[1]=Integer.toString(g.getNumberCorrect());
+                data[2]=Integer.toString((g.getTotalQuestions()-1)-g.getNumberCorrect());
+                data[3]=Float.toString(avg_time);
+                data[4]=Float.toString(shortest_time/1000);
+                data[5]=type;
+                data[6]=difficulty;
+                PutData putData = new PutData("http://first.stud.vts.su.ac.rs/agilni_projekat/set_result.php", "POST", field,data);
+                putData.startPut();
+                /*if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Toast myToast=Toast.makeText(StartGame.this, result, Toast.LENGTH_SHORT);
+                        myToast.setGravity(Gravity.FILL_HORIZONTAL|Gravity.FILL_VERTICAL, 0, 0);
+                        myToast.show();
+                    }
+                }*/
                 final Handler handler=new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override

@@ -11,6 +11,7 @@ import android.widget.Toast;
 public class MainMenu extends AppCompatActivity {
     Button btnAdd, btnSub, btnMulti, btnDiv, btnLogout;
     Intent intent;
+    String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,40 +21,40 @@ public class MainMenu extends AppCompatActivity {
         btnMulti=findViewById(R.id.btn_answer2);
         btnDiv=findViewById(R.id.btn_answer3);
         btnLogout=findViewById(R.id.button5);
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null)
+            id = extras.getString("id");
         intent=new Intent(getApplicationContext(),SelectLevel.class);
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+
+        View.OnClickListener type = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),SelectLevel.class);
-                intent.putExtra("type","add");
+                Button buttonClicked=(Button)view;
+                String typeSelected=buttonClicked.getText().toString();
+                switch (typeSelected) {
+                    case "Add(+)":
+                        intent.putExtra("type", "add");
+                        break;
+                    case "Substract(-)":
+                        intent.putExtra("type","subtract");
+                        break;
+                    case "Multiply(*)":
+                        intent.putExtra("type","multiply");
+                        break;
+                    case "Module(%)":
+                        intent.putExtra("type","module");
+                        break;
+                }
+                if (extras!=null)
+                    intent.putExtra("id",id);
                 startActivity(intent);
                 finish();
             }
-        });
-        btnSub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent.putExtra("type","subtract");
-                startActivity(intent);
-                finish();
-            }
-        });
-        btnMulti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent.putExtra("type","multiply");
-                startActivity(intent);
-                finish();
-            }
-        });
-        btnDiv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent.putExtra("type","module");
-                startActivity(intent);
-                finish();
-            }
-        });
+        };
+        btnAdd.setOnClickListener(type);
+        btnSub.setOnClickListener(type);
+        btnMulti.setOnClickListener(type);
+        btnDiv.setOnClickListener(type);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

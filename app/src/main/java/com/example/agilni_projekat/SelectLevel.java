@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class SelectLevel extends AppCompatActivity {
     Button btnEasy, btnMedium, btnHard;
@@ -20,6 +21,7 @@ public class SelectLevel extends AppCompatActivity {
         btnHard = findViewById(R.id.btn_answer2);
         Bundle extras = getIntent().getExtras();
         String type = extras.getString("type");
+        String id = extras.getString("id");
         View.OnClickListener difficulty = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -27,6 +29,7 @@ public class SelectLevel extends AppCompatActivity {
                 String difficultySelected=buttonClicked.getText().toString();
                 i.putExtra("type", type);
                 i.putExtra("difficulty", difficultySelected);
+                i.putExtra("id",id);
                 startActivity(i);
                 finish();
             }
