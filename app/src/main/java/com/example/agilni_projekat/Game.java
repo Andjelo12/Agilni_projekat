@@ -7,7 +7,7 @@ public class Game {
 
 
     private List<Question> questionAdds;
-    private int numberCorrect, numberIncorrect,totalQuestions;
+    private int numberCorrect, numberIncorrect,totalQuestions, level_points,points=0;
     private Question currentQuestionAdd;
 
     public Game(String type, String difficulty){
@@ -20,15 +20,29 @@ public class Game {
     public void makeNewQuestion(String type, String difficulty){
         currentQuestionAdd = new Question(type, difficulty);
         totalQuestions++;
+        switch (difficulty){
+            case "Easy":
+                level_points=1;
+                break;
+            case "Medium":
+                level_points=2;
+                break;
+            case "Hard":
+                level_points=3;
+                break;
+        }
         questionAdds.add(currentQuestionAdd);
     }
     public boolean checkAnswer(int submittedAnswer){
         boolean isCorrect;
         if(currentQuestionAdd.getAnswer()==submittedAnswer){
             numberCorrect++;
+            points+=level_points;
             isCorrect=true;
         }else {
             numberIncorrect++;
+            if (points>0)
+                points-=level_points;
             isCorrect=false;
         }
         return isCorrect;
@@ -51,6 +65,10 @@ public class Game {
 
     public int getNumberIncorrect() {
         return numberIncorrect;
+    }
+
+    public int getPoints() {
+        return points;
     }
 
     public void setNumberIncorrect(int numberIncorrect) {
