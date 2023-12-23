@@ -7,6 +7,7 @@
     android:background="@drawable/pozadina"
     tools:context=".Login">
 
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
@@ -63,6 +64,7 @@
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/ic_pass"
             android:inputType="textPassword" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
@@ -99,7 +101,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.637"
+        app:layout_constraintVertical_bias="0.578"
         tools:ignore="MissingConstraints"
         tools:targetApi="jelly_bean" />
 
@@ -110,10 +112,9 @@
         android:text="Play as guest"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.694"
+        app:layout_constraintVertical_bias="0.619"
         tools:targetApi="jelly_bean" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class SelectLevel extends AppCompatActivity {
-    Button btnEasy, btnMedium, btnHard;
+    Button btnEasy, btnMedium, btnHard,btnBack;
     Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,7 @@ public class SelectLevel extends AppCompatActivity {
         btnEasy = findViewById(R.id.btn_answer0);
         btnMedium = findViewById(R.id.btn_answer1);
         btnHard = findViewById(R.id.btn_answer2);
+        btnBack = findViewById(R.id.button);
         Bundle extras = getIntent().getExtras();
         String type = extras.getString("type");
         String id = extras.getString("id");
@@ -37,6 +38,15 @@ public class SelectLevel extends AppCompatActivity {
         btnEasy.setOnClickListener(difficulty);
         btnMedium.setOnClickListener(difficulty);
         btnHard.setOnClickListener(difficulty);
-
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SelectLevel.this, MainMenu.class);
+                intent.putExtra("type", type);
+                intent.putExtra("id",id);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }

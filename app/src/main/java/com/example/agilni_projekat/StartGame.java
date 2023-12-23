@@ -172,9 +172,7 @@ public class StartGame extends AppCompatActivity {
                 /*if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-                        Toast myToast=Toast.makeText(StartGame.this, result, Toast.LENGTH_SHORT);
-                        myToast.setGravity(Gravity.FILL_HORIZONTAL|Gravity.FILL_VERTICAL, 0, 0);
-                        myToast.show();
+                        Toast.makeText(StartGame.this, result, Toast.LENGTH_SHORT).show();
                     }
                 }*/
                 final Handler handler = new Handler();
@@ -182,6 +180,7 @@ public class StartGame extends AppCompatActivity {
                     @Override
                     public void run() {
                         Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+                        intent.putExtra("id",id);
                         startActivity(intent);
                         finish();
                     }
