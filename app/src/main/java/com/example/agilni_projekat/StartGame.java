@@ -45,20 +45,29 @@ public class StartGame extends AppCompatActivity {
         g = new Game(type, difficulty);
         btn_start = findViewById(R.id.btn_start);
         btn_answer0 = findViewById(R.id.btn_answer01);
+        btn_answer0.setEnabled(false);
         btn_answer1 = findViewById(R.id.btn_answer1);
+        btn_answer1.setEnabled(false);
         btn_answer2 = findViewById(R.id.btn_answer2);
+        btn_answer2.setEnabled(false);
         btn_answer3 = findViewById(R.id.btn_answer3);
+        btn_answer3.setEnabled(false);
         if (difficulty.equals("Medium")) {
             btn_answer4 = findViewById(R.id.btn_answer4);
+            btn_answer4.setEnabled(false);
             btn_answer5 = findViewById(R.id.btn_answer5);
+            btn_answer5.setEnabled(false);
         }
         if (difficulty.equals("Hard")) {
             btn_answer4 = findViewById(R.id.btn_answer4);
+            btn_answer4.setEnabled(false);
             btn_answer5 = findViewById(R.id.btn_answer5);
+            btn_answer5.setEnabled(false);
             btn_answer6 = findViewById(R.id.btn_answer6);
+            btn_answer6.setEnabled(false);
             btn_answer7 = findViewById(R.id.btn_answer7);
+            btn_answer7.setEnabled(false);
         }
-
         tv_score = findViewById(R.id.tv_score);
         tv_bottommessage = findViewById(R.id.tv_bottommessage);
         tv_questions = findViewById(R.id.tv_questions);
@@ -84,6 +93,20 @@ public class StartGame extends AppCompatActivity {
             public void onClick(View view) {
                 Button start_button = (Button) view;
                 start_button.setVisibility(View.INVISIBLE);
+                btn_answer0.setEnabled(true);
+                btn_answer1.setEnabled(true);
+                btn_answer2.setEnabled(true);
+                btn_answer3.setEnabled(true);
+                if (difficulty.equals("Medium")){
+                    btn_answer4.setEnabled(true);
+                    btn_answer5.setEnabled(true);
+                }
+                if (difficulty.equals("Hard")) {
+                    btn_answer4.setEnabled(true);
+                    btn_answer5.setEnabled(true);
+                    btn_answer6.setEnabled(true);
+                    btn_answer7.setEnabled(true);
+                }
                 totalSeconds = secondsRemaining = seconds;
                 g = new Game(type, difficulty);
                 startTime = System.currentTimeMillis();
