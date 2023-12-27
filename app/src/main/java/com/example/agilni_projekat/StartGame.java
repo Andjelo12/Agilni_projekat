@@ -207,7 +207,7 @@ public class StartGame extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-                }, 2000);
+                }, 4000);
             }
         };
     }
