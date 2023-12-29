@@ -20,7 +20,7 @@ public class Question {
         switch (type) {
             case "add":
                 this.answer = this.firstNumber + this.secondNumber;
-                this.questionPhrase = firstNumber + " + " + secondNumber + " = ";
+                this.questionPhrase =  " + " ;
                 upperLimit = 12;
                 break;
             case "subtract":
@@ -30,17 +30,17 @@ public class Question {
                     this.secondNumber = temp;
                 }
                 this.answer = this.firstNumber - this.secondNumber;
-                this.questionPhrase = firstNumber + " - " + secondNumber + " = ";
+                this.questionPhrase = " - ";
                 upperLimit = 12;
                 break;
             case "multiply":
                 this.answer = this.firstNumber * this.secondNumber;
-                this.questionPhrase = firstNumber + " * " + secondNumber + " = ";
+                this.questionPhrase = " * ";
                 upperLimit = 36;
                 break;
             case "module":
                 this.answer = this.firstNumber % this.secondNumber;
-                this.questionPhrase = firstNumber + " % " + secondNumber + " = ";
+                this.questionPhrase = " % ";
                 upperLimit = 12;
                 break;
         }
@@ -60,7 +60,15 @@ public class Question {
 //        for (int j = 0; j < i-1; j++) {
 //            this.answerArray[j] = ThreadLocalRandom.current().nextInt(1, upperLimit);
 //        }
-        answerArray[answerPosition] = answer;
+        int flag=0;
+        for (int i=0;i<answerArray.length;i++){
+            if (answerArray[i]==answer) {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag==0)
+            answerArray[answerPosition] = answer;
     }
     private static int[] generateRandomNumbersArray(int n, int i, int j) {
         if (n > (j - i + 1)) {

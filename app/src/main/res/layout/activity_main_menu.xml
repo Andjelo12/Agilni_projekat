@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select playing mode"
-        android:textSize="24sp"
+        android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -41,7 +41,8 @@
                 android:height="200dp"
                 android:background="#81ecec"
                 android:text="Add(+)"
-                android:textColor="#FBFBFB" />
+                android:textColor="#FBFBFB"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/btn_answer1"
@@ -51,7 +52,8 @@
                 android:height="200dp"
                 android:background="#74b9ff"
                 android:text="Substract(-)"
-                android:textColor="#FBFBFB" />
+                android:textColor="#FBFBFB"
+                android:textSize="24sp" />
 
         </TableRow>
 
@@ -67,7 +69,8 @@
                 android:height="200dp"
                 android:background="#00cec9"
                 android:text="Multiply(*)"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/btn_answer3"
@@ -77,7 +80,8 @@
                 android:height="200dp"
                 android:background="#0984e3"
                 android:text="Module(%)"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
         </TableRow>
 
     </TableLayout>
@@ -89,6 +93,7 @@
         android:backgroundTint="#8BC34A"
         android:text="Logout"
         android:textColor="#FFFFFF"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

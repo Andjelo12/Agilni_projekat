@@ -18,17 +18,21 @@
             android:name=".StartGame"
             android:exported="false" />
         <activity
+            android:name=".MainMenu"
+            android:exported="false" />
+        <activity
             android:name=".SelectLevel"
             android:exported="false" />
         <activity
-            android:name=".MainMenu"
-            android:exported="false" />
+            android:name=".SignUp"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".Login"
             android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
-            android:name=".SignUp"
+            android:name=".splash_screen"
             android:exported="true"
             android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>

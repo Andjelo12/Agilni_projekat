@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class StartGame extends AppCompatActivity {
     Button btn_start, btn_answer0, btn_answer1, btn_answer2, btn_answer3, btn_answer4, btn_answer5, btn_answer6, btn_answer7;
     TextView tv_score, tv_questions, tv_timer, tv_bottommessage;
     ProgressBar prog_timer;
+    ImageView firstNumImg, secondNumImg;
     long startTime;
     ArrayList<Long> middleTime;
     int secondsRemaining, totalSeconds;
@@ -52,6 +54,8 @@ public class StartGame extends AppCompatActivity {
         btn_answer2.setEnabled(false);
         btn_answer3 = findViewById(R.id.btn_answer3);
         btn_answer3.setEnabled(false);
+        firstNumImg = findViewById(R.id.imageView);
+        secondNumImg = findViewById(R.id.imageView2);
         if (difficulty.equals("Medium")) {
             btn_answer4 = findViewById(R.id.btn_answer4);
             btn_answer4.setEnabled(false);
@@ -168,7 +172,7 @@ public class StartGame extends AppCompatActivity {
                 btn_answer1.setEnabled(false);
                 btn_answer2.setEnabled(false);
                 btn_answer3.setEnabled(false);
-                tv_bottommessage.setText("Vreme je isteklo! " + g.getNumberCorrect() + "/" + (g.getTotalQuestions() - 1)+" Pts:"+g.getPoints());
+                tv_bottommessage.setText("Vreme je isteklo! " + "\nTačni | Netačni: " + g.getNumberCorrect() + " | " + (g.getTotalQuestions() - 1)+"\nPts: "+g.getPoints());
                 String[] field = new String[8];
                 field[0] = "id_user";
                 field[1] = "correct_answers";
@@ -214,6 +218,44 @@ public class StartGame extends AppCompatActivity {
 
     private void nextTurn(Game g, String type, String difficulty) {
         g.makeNewQuestion(type, difficulty);
+        switch (g.getCurrentQuestion().getFirstNumber()){
+            case 1:
+                firstNumImg.setImageResource(R.drawable.jedan);
+                break;
+            case 2:
+                firstNumImg.setImageResource(R.drawable.dva);
+                break;
+            case 3:
+                firstNumImg.setImageResource(R.drawable.tri);
+                break;
+            case 4:
+                firstNumImg.setImageResource(R.drawable.cetiri);
+                break;
+            case 5:
+                firstNumImg.setImageResource(R.drawable.pet);
+                break;
+            case 6:
+                firstNumImg.setImageResource(R.drawable.sest);
+        }
+        switch (g.getCurrentQuestion().getSecondNumber()){
+            case 1:
+                secondNumImg.setImageResource(R.drawable.jedan);
+                break;
+            case 2:
+                secondNumImg.setImageResource(R.drawable.dva);
+                break;
+            case 3:
+                secondNumImg.setImageResource(R.drawable.tri);
+                break;
+            case 4:
+                secondNumImg.setImageResource(R.drawable.cetiri);
+                break;
+            case 5:
+                secondNumImg.setImageResource(R.drawable.pet);
+                break;
+            case 6:
+                secondNumImg.setImageResource(R.drawable.sest);
+        }
         int[] answer = g.getCurrentQuestion().getAnswerArray();
         btn_answer0.setText(Integer.toString(answer[0]));
         btn_answer1.setText(Integer.toString(answer[1]));
