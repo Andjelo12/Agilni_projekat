@@ -1,10 +1,13 @@
 package com.example.agilni_projekat;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 //import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class StartGame extends AppCompatActivity {
@@ -24,20 +29,23 @@ public class StartGame extends AppCompatActivity {
     TextView tv_score, tv_questions, tv_timer, tv_bottommessage;
     ProgressBar prog_timer;
     ImageView firstNumImg, secondNumImg;
-    long startTime;
+    long startTime, pauseTime = 0, tempTime;
+    int seconds;
     ArrayList<Long> middleTime;
     int secondsRemaining, totalSeconds;
     float shortest_time, avg_time;
+    boolean started;
     CountDownTimer timer;
     Game g;
+    String id, type, difficulty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-        String type = extras.getString("type");
-        String id = extras.getString("id");
-        String difficulty = extras.getString("difficulty");
+        type = extras.getString("type");
+        id = extras.getString("id");
+        difficulty = extras.getString("difficulty");
         if (difficulty.equals("Easy"))
             setContentView(R.layout.activity_easy);
         else if (difficulty.equals("Medium"))
@@ -78,7 +86,6 @@ public class StartGame extends AppCompatActivity {
         tv_timer = findViewById(R.id.tv_timer);
 
         prog_timer = findViewById(R.id.prog_timer);
-        int seconds;
         if (difficulty.equals("Easy"))
             seconds = 40;
         else if (difficulty.equals("Medium"))
@@ -115,7 +122,7 @@ public class StartGame extends AppCompatActivity {
                 g = new Game(type, difficulty);
                 startTime = System.currentTimeMillis();
                 nextTurn(g, type, difficulty);
-                timer.start();
+                startTimer();
             }
         };
         View.OnClickListener answerButtonClickListener = new View.OnClickListener() {
@@ -124,7 +131,7 @@ public class StartGame extends AppCompatActivity {
                 Button buttonClicked = (Button) view;
                 int answerSlected = Integer.parseInt(buttonClicked.getText().toString());
                 g.checkAnswer(answerSlected);
-                middleTime.add(System.currentTimeMillis());
+                middleTime.add(System.currentTimeMillis()-pauseTime);
                 if (middleTime.size() != 1)
                     tv_score.setText(Float.toString((float) (middleTime.get(middleTime.size() - 1) - middleTime.get(middleTime.size() - 2)) / 1000));
                 else
@@ -149,19 +156,22 @@ public class StartGame extends AppCompatActivity {
             btn_answer6.setOnClickListener(answerButtonClickListener);
             btn_answer7.setOnClickListener(answerButtonClickListener);
         }
+    }
+    public void startTimer(){
         timer = new CountDownTimer(seconds * 1000, 1000) {
             @Override
-            public void onTick(long l) {
-                secondsRemaining--;
-                tv_timer.setText(secondsRemaining + " sek");
-                prog_timer.setProgress(totalSeconds - secondsRemaining);
+            public void onTick(long millisUntilFinished) {
+                started=true;
+                seconds--;
+                tv_timer.setText(seconds + " sek");
+                prog_timer.setProgress(totalSeconds - seconds);
             }
 
             @SuppressLint("DefaultLocale")
             @Override
             public void onFinish() {
                 if (g.getTotalQuestions() - 1 != 0) {
-                    avg_time = (float) seconds / (g.getTotalQuestions() - 1);
+                    avg_time = (float) totalSeconds / (g.getTotalQuestions() - 1);
                     shortest_time = (float) (middleTime.get(0) - startTime);
                     for (int i = 1; i < middleTime.size(); i++)
                         if (middleTime.get(i) - middleTime.get(i - 1) < shortest_time) {
@@ -213,9 +223,40 @@ public class StartGame extends AppCompatActivity {
                     }
                 }, 4000);
             }
-        };
+        }.start();
     }
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        if (started) {
+            tempTime = System.currentTimeMillis();
+            timer.cancel();
+            Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.layout_custom_dialog);
+            Button btnClose = dialog.findViewById(R.id.btn_no);
+            TextView txtResult = dialog.findViewById(R.id.txtDesc);
+            txtResult.setText("Tačni/netačni: " + g.getNumberCorrect() + " | " + (g.getTotalQuestions()-1) + "\nPts: " + g.getPoints()+"\nPress back to continue");
+            btnClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+                    intent.putExtra("id",id);
+                    startActivity(intent);
+                    finish();
+                }
+            });
 
+            dialog.show();
+            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    pauseTime += (System.currentTimeMillis()-tempTime);
+                    startTimer();
+                }
+            });
+            dialog.setCanceledOnTouchOutside(false);
+        }
+    }
     private void nextTurn(Game g, String type, String difficulty) {
         g.makeNewQuestion(type, difficulty);
         switch (g.getCurrentQuestion().getFirstNumber()){
