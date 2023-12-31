@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainMenu extends AppCompatActivity {
     Button btnAdd, btnSub, btnMulti, btnDiv, btnLogout;
+    TextView oIgri;
     Intent intent;
     String id;
     @Override
@@ -21,11 +23,18 @@ public class MainMenu extends AppCompatActivity {
         btnMulti=findViewById(R.id.btn_answer2);
         btnDiv=findViewById(R.id.btn_answer3);
         btnLogout=findViewById(R.id.button5);
+        oIgri=findViewById(R.id.textView5);
         Bundle extras = getIntent().getExtras();
         if (extras!=null)
             id = extras.getString("id");
         intent=new Intent(getApplicationContext(),SelectLevel.class);
-
+        oIgri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent about=new Intent(MainMenu.this, oIgri.class);
+                startActivity(about);
+            }
+        });
         View.OnClickListener type = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
