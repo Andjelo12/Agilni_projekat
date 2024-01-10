@@ -182,6 +182,16 @@ public class StartGame extends AppCompatActivity {
                 btn_answer1.setEnabled(false);
                 btn_answer2.setEnabled(false);
                 btn_answer3.setEnabled(false);
+                if (difficulty.equals("Medium")){
+                    btn_answer4.setEnabled(false);
+                    btn_answer5.setEnabled(false);
+                }
+                if (difficulty.equals("Hard")){
+                    btn_answer4.setEnabled(false);
+                    btn_answer5.setEnabled(false);
+                    btn_answer6.setEnabled(false);
+                    btn_answer7.setEnabled(false);
+                }
                 tv_bottommessage.setText("Vreme je isteklo! " + "\nTačni | Netačni: " + g.getNumberCorrect() + " | " + (g.getTotalQuestions() - 1)+"\nPts: "+g.getPoints());
                 String[] field = new String[8];
                 field[0] = "id_user";
@@ -229,13 +239,25 @@ public class StartGame extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (started) {
+            if (g.getTotalQuestions() - 1 != 0) {
+                avg_time = (float) totalSeconds / (g.getTotalQuestions() - 1);
+                shortest_time = (float) (middleTime.get(0) - startTime);
+                for (int i = 1; i < middleTime.size(); i++)
+                    if (middleTime.get(i) - middleTime.get(i - 1) < shortest_time) {
+                        shortest_time = (float) (middleTime.get(i) - middleTime.get(i - 1));
+                    }
+            }else {
+                avg_time = 0;
+                shortest_time = 0;
+            }
             tempTime = System.currentTimeMillis();
             timer.cancel();
             Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.layout_custom_dialog);
             Button btnClose = dialog.findViewById(R.id.btn_no);
             TextView txtResult = dialog.findViewById(R.id.txtDesc);
-            txtResult.setText("Tačni/netačni: " + g.getNumberCorrect() + " | " + (g.getTotalQuestions()-1) + "\nPts: " + g.getPoints()+"\nPress back to continue");
+            txtResult.setText("Prosečno vreme igranja: "+String.format("%.02f",avg_time)+"\nNajbrži odgovor: "+shortest_time/1000);
+//            txtResult.setText("Tačni/netačni: " + g.getNumberCorrect() + " | " + (g.getTotalQuestions()-1) + "\nPts: " + g.getPoints()+"\nPress back to continue");
             btnClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
