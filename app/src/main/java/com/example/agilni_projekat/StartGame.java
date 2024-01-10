@@ -255,6 +255,11 @@ public class StartGame extends AppCompatActivity {
                 }
             });
             dialog.setCanceledOnTouchOutside(false);
+        }else{
+            Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+            intent.putExtra("id",id);
+            startActivity(intent);
+            finish();
         }
     }
     private void nextTurn(Game g, String type, String difficulty) {
