@@ -57,7 +57,7 @@ public class MainMenu extends AppCompatActivity {
                 if (extras!=null)
                     intent.putExtra("id",id);
                 startActivity(intent);
-                finish();
+//                finish();
             }
         };
         btnAdd.setOnClickListener(type);
