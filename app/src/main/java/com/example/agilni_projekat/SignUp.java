@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,10 +25,15 @@ public class SignUp extends AppCompatActivity {
     ProgressBar progressBar;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        Intent serviceIntent = new Intent(SignUp.this, BackgroundSoundService.class);
+        serviceIntent.putExtra("track","1");
+        startService(serviceIntent);
 
         textInputEditTextUsername=findViewById(R.id.username);
         textInputEditTextPassword=findViewById(R.id.password);
@@ -60,7 +66,12 @@ public class SignUp extends AppCompatActivity {
                 String username, password;
                 username=String.valueOf(textInputEditTextUsername.getText());
                 password=String.valueOf(textInputEditTextPassword.getText());
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                }catch (Exception e){
 
+                }
                 if (!username.equals("") && !password.equals("")){
                 progressBar.setVisibility(View.VISIBLE);
                 Handler handler = new Handler(Looper.getMainLooper());
@@ -76,7 +87,6 @@ public class SignUp extends AppCompatActivity {
                         PutData putData = new PutData("http://first.stud.vts.su.ac.rs/agilni_projekat/signup.php","POST",field,data);
                         if (putData.startPut()) {
                             if (putData.onComplete()) {
-                                progressBar.setVisibility(View.GONE);
                                 String result = putData.getResult();
                                 if (result.equals("Sign Up Success")){
                                     Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
@@ -84,6 +94,7 @@ public class SignUp extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 }else {
+                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
                                 }
                             }

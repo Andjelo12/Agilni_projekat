@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -54,7 +55,12 @@ public class Login extends AppCompatActivity {
                 String username, password, email;
                 username = String.valueOf(textInputEditTextUsername.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
+                try {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                }catch (Exception e){
 
+                }
                 if (!username.equals("") && !password.equals("")) {
                     progressBar.setVisibility(View.VISIBLE);
                     Handler handler = new Handler(Looper.getMainLooper());
@@ -71,9 +77,9 @@ public class Login extends AppCompatActivity {
 
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
-                                    progressBar.setVisibility(View.GONE);
                                     String result = putData.getResult();
                                     if (result.equals("Username or Password wrong")) {
+                                        progressBar.setVisibility(View.GONE);
                                         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                                     } else {
                                         //String id=data[0];
@@ -82,6 +88,7 @@ public class Login extends AppCompatActivity {
                                         intent.putExtra("id", result);
                                         startActivity(intent);
                                         finish();
+                                        overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left);
                                     }
                                 }
                             }

@@ -22,13 +22,13 @@ public class Game {
         totalQuestions++;
         switch (difficulty){
             case "Easy":
-                level_points=1;
-                break;
-            case "Medium":
                 level_points=2;
                 break;
-            case "Hard":
+            case "Medium":
                 level_points=3;
+                break;
+            case "Hard":
+                level_points=4;
                 break;
         }
         questionAdds.add(currentQuestionAdd);

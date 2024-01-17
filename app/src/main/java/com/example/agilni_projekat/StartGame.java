@@ -7,20 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 //import com.vishnusivadas.advanced_httpurlconnection.PutData;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -38,6 +33,7 @@ public class StartGame extends AppCompatActivity {
     CountDownTimer timer;
     Game g;
     String id, type, difficulty;
+    Intent serviceIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +42,7 @@ public class StartGame extends AppCompatActivity {
         type = extras.getString("type");
         id = extras.getString("id");
         difficulty = extras.getString("difficulty");
+        serviceIntent = new Intent(StartGame.this, BackgroundSoundService.class);
         if (difficulty.equals("Easy"))
             setContentView(R.layout.activity_easy);
         else if (difficulty.equals("Medium"))
@@ -102,6 +99,9 @@ public class StartGame extends AppCompatActivity {
         View.OnClickListener startButtonClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                serviceIntent.putExtra("track","2");
+                stopService(serviceIntent);
+                startService(serviceIntent);
                 Button start_button = (Button) view;
                 start_button.setVisibility(View.INVISIBLE);
                 btn_answer0.setEnabled(true);
@@ -170,6 +170,9 @@ public class StartGame extends AppCompatActivity {
             @SuppressLint("DefaultLocale")
             @Override
             public void onFinish() {
+                serviceIntent.putExtra("track","3");
+                stopService(serviceIntent);
+                startService(serviceIntent);
                 if (g.getTotalQuestions() - 1 != 0) {
                     avg_time = (float) totalSeconds / (g.getTotalQuestions() - 1);
                     shortest_time = (float) (middleTime.get(0) - startTime);
@@ -226,6 +229,9 @@ public class StartGame extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        serviceIntent.putExtra("track","1");
+                        stopService(serviceIntent);
+                        startService(serviceIntent);
                         Intent intent = new Intent(getApplicationContext(), MainMenu.class);
                         intent.putExtra("id",id);
                         startActivity(intent);
@@ -239,13 +245,20 @@ public class StartGame extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (started) {
+            serviceIntent.putExtra("track","1");
+            stopService(serviceIntent);
+            startService(serviceIntent);
             if (g.getTotalQuestions() - 1 != 0) {
-                avg_time = (float) totalSeconds / (g.getTotalQuestions() - 1);
+                long secondsInGame=0;
                 shortest_time = (float) (middleTime.get(0) - startTime);
-                for (int i = 1; i < middleTime.size(); i++)
+                secondsInGame+=shortest_time;
+                for (int i = 1; i < middleTime.size(); i++) {
+                    secondsInGame+=(middleTime.get(i) - middleTime.get(i - 1));
                     if (middleTime.get(i) - middleTime.get(i - 1) < shortest_time) {
                         shortest_time = (float) (middleTime.get(i) - middleTime.get(i - 1));
                     }
+                }
+                avg_time = (float) secondsInGame / (g.getTotalQuestions() - 1);
             }else {
                 avg_time = 0;
                 shortest_time = 0;
@@ -256,7 +269,7 @@ public class StartGame extends AppCompatActivity {
             dialog.setContentView(R.layout.layout_custom_dialog);
             Button btnClose = dialog.findViewById(R.id.btn_no);
             TextView txtResult = dialog.findViewById(R.id.txtDesc);
-            txtResult.setText("Prosečno vreme igranja: "+String.format("%.02f",avg_time)+"\nNajbrži odgovor: "+shortest_time/1000);
+            txtResult.setText("Prosečno vreme za odgovor: "+String.format("%.03f",avg_time/1000)+"s\nNajbrži odgovor: "+shortest_time/1000+"s");
 //            txtResult.setText("Tačni/netačni: " + g.getNumberCorrect() + " | " + (g.getTotalQuestions()-1) + "\nPts: " + g.getPoints()+"\nPress back to continue");
             btnClose.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -272,6 +285,9 @@ public class StartGame extends AppCompatActivity {
             dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialogInterface) {
+                    serviceIntent.putExtra("track","2");
+                    stopService(serviceIntent);
+                    startService(serviceIntent);
                     pauseTime += (System.currentTimeMillis()-tempTime);
                     startTimer();
                 }
@@ -357,7 +373,7 @@ public class StartGame extends AppCompatActivity {
 
         tv_questions.setText(g.getCurrentQuestion().getQuestionPhrase());
 
-        tv_bottommessage.setText(g.getNumberCorrect() + "/" + (g.getTotalQuestions() - 1) + " "+g.getPoints());
+        tv_bottommessage.setText("T/N:"+g.getNumberCorrect() + "/" + (g.getTotalQuestions() - 1) + "\nPts:"+g.getPoints());
     }
 
 }
